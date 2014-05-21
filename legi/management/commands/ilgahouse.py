@@ -16,7 +16,7 @@ class Command(BaseCommand):
 		for a in soup.findAll('a',href=True):
 			if re.findall('Bills', a['href']):
 				l = (site + a['href']+'&Primary=True')
-				link.append(str(l))
+				links.append(str(l))
 				x+=1
 		chamber_abbr = 'HB'
 		for link in links:

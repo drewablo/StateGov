@@ -38,11 +38,10 @@ class Command(BaseCommand):
 						actions = last_action
 						dt = last_action_date
 						if not Chamber.objects.filter(legislation=legislation):
-							s = Chamber(legislator=legislator, legislation=legislation, actions=actions, dt=dt)
-							s.save
+							s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date)
 						elif not Chamber.objects.filter(leiglsation=legislation, actions=actions):
-							for x in Chamber.object.filter(leiglsation=legislation, actions=actions):
-								x.action=action
+							for x in Chamber.object.filter(leiglsation=bill, actions=last_action):
+								x.action=last_action
 								x.save()
-								x.dt=dt
+								x.dt=last_action_date
 								x.save()

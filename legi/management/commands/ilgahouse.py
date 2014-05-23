@@ -7,8 +7,6 @@ import re
 class Command(BaseCommand):
 	def handle(self, *args, **options):
 		chmbrs =['http://www.ilga.gov/house/', 'http://www.ilga.gov/senate/']
-		chamber_abbr = ['HB','SB']
-		c = 0
 		for chmbr in chmbrs:
 			site = chmbr	
 			url = urllib2.urlopen(site)
@@ -22,7 +20,7 @@ class Command(BaseCommand):
 					l = (site + a['href']+'&Primary=True')
 					links.append(str(l))
 					x+=1
-			chamber_abbr = chamber_abbr[c]
+			chamber_abbr = 'HB'
 			for link in links:
 				url = urllib2.urlopen(link)
 				content = url.read()
@@ -37,13 +35,16 @@ class Command(BaseCommand):
 					last_action_date = col[5].string
 					for z in re.findall('2014', last_action_date):
 						for q in re.findall(chamber_abbr, bill):
-							if not Chamber.objects.filter(legislation=bill):
-								s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date)
+							legislator = sponsor
+							legislation = bill
+							actions = last_action
+							dt = last_action_date
+							if not Chamber.objects.filter(legislation=legislation):
+								s = Chamber(legislator=legislator, legislation=legislation, actions=actions, dt=dt)
 								s.save
-							else:
-								for o in (Chamber.objects.filter(actions=last_action).exists() == False):
-									o.actions=last_action
-									o.save()
-									o.dt=last_action_date
-									o.save()
-			c +=1
+							elif not Chamber.objects.filter(leigslation=legislation, actions=actions):
+								for x in Chamber.object.filter(legislation=legislation, actions=actions):
+									x.action=action
+									x.save()
+									x.dt=dt
+									x.save()

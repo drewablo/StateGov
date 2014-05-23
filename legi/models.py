@@ -7,8 +7,4 @@ class Chamber(models.Model):
 	actions = models.CharField(max_length=100)
 	dt =  models.CharField(max_length=10)
 	def __str__(self):
-<<<<<<< HEAD
 		return self.legislator
-=======
-		return self.legislator
->>>>>>> 0b9725b190782a4c66056ac35b00fba4a56c4f56

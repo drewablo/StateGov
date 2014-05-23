@@ -6,6 +6,5 @@ class Chamber(models.Model):
 	legislation = models.CharField(max_length=8)
 	actions = models.CharField(max_length=100)
 	dt =  models.CharField(max_length=10)
-	def __unicode__(self):
-		return ('%s is the main sponsor of %s/. Last action taken on the bill was %s on %s') %(self.name, self.bill, self.last_action, self.last_action_date)
-		
+	def __str__(self):
+		return self.legislator

@@ -3,6 +3,7 @@ from legi.models import Chamber
 from bs4 import BeautifulSoup
 import urllib2
 import re
+import os
 
 class Command(BaseCommand):
 	def handle(self, *args, **options):
@@ -37,14 +38,15 @@ class Command(BaseCommand):
 					last_action_date = col[5].string
 					for z in re.findall('2014', last_action_date):
 						for q in re.findall(chamber_abbr, bill):
-							if not Chamber.objects.filter(legislation=bill):
+							if Chamber.objects.filter(legislation=bill).exists() == False:
 								s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date)
 								s.save
-							elif Chamber.objects.filter(legislation=bill):
-								if Chamber.objects.filter(actions=last_action).exists() == False:
-									s = Chamber.objects.get(legislation=bill)
+							elif Chamber.objects.filter(legislation=bill).exists() == True:
+								s = Chamber.objects.get(legislation=bill)
+								if s.actions.encode('ascii')!=last_action:
 									s.actions=last_action
 									s.save()
 									s.dt=last_action_date
 									s.save()
+
 			c +=1

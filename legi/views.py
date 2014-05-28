@@ -1,11 +1,14 @@
 from django.shortcuts import render
+from django.db.models import Q
 from legi.models import Chamber
 import time
 
 def billcount(request):
-	d = time.strftime("%-m/%d/%Y")
-	d = d.encode('utf-8')
-	latest_count = Chamber.objects.filter(dt=(d)).count()
-	context = {'latest_count': latest_count}
+	latest_count = Chamber.objects.filter(dt=(time.strftime("%-m/%d/%Y"))).count()
+	pbh = Chamber.objects.filter(actions="Passed Both Houses").count()
+	sttg = Chamber.objects.filter(actions="Sent to the Governor").count()
+	a = Chamber.objects.filter(actions__startswith='Referred to Assignments').count()
+	b = Chamber.objects.filter(actions__startswith='Rule 19').count()
+	purg = a+b
+	context = {'latest_count': latest_count, 'pbh': pbh, 'sttg': sttg, 'purg': purg}
 	return render(request, 'legi/billcount.html', context)
-

@@ -40,7 +40,8 @@ class Command(BaseCommand):
 						for q in re.findall(chamber_abbr, bill):
 							if Chamber.objects.filter(legislation=bill).exists() == False:
 								s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date)
-								s.save
+								s.save()
+								print 'New Record Found'
 							elif Chamber.objects.filter(legislation=bill).exists() == True:
 								s = Chamber.objects.get(legislation=bill)
 								if s.actions.encode('ascii')!=last_action:
@@ -48,5 +49,6 @@ class Command(BaseCommand):
 									s.save()
 									s.dt=last_action_date
 									s.save()
+									print 'Record Updated'
 
 			c +=1

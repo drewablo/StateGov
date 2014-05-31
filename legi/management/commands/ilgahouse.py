@@ -35,7 +35,7 @@ class Command(BaseCommand):
 					last_action_date = col[5].string
 					for z in re.findall('2014', last_action_date):
 						for q in re.findall(chamber_abbr, bill):
-							legislator = sponsor
+							legislator = sponsor 
 							legislation = bill
 							actions = last_action
 							dt = last_action_date

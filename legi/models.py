@@ -6,3 +6,8 @@ class Chamber(models.Model):
 	legislation = models.CharField(max_length=8)
 	actions = models.CharField(max_length=100)
 	dt =  models.CharField(max_length=10)
+
+class Votes(models.Model):
+	legislator = models.CharField(max_length=60)
+	legislation = models.CharField(max_length=8)
+	vote = models.CharField(max_length=4)

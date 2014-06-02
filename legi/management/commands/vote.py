@@ -15,7 +15,7 @@ class Command(BaseCommand):
 			content = url.read()
 			soup = BeautifulSoup(content)
 			links = []
-			linkStat = []
+			linkStats = []
 			x=0
 			y=0
 			table = soup.find('table', cellpadding=3)
@@ -32,27 +32,30 @@ class Command(BaseCommand):
 				table = soup.find('table', cellpadding=3)
 				for a in table.findAll('a',href=True):
 					if re.findall('BillStatus', a['href']):
-						linkStat.append(str('http://ilga.gov'+a['href']))
-			for ll in linkStat:
-				url = urllib2.urlopen(ll)
+						linkStats.append(str('http://ilga.gov'+a['href']))
+			for linkStat in linkStats:
+				url = urllib2.urlopen(linkStat)
 				content = url.read()
 				soup = BeautifulSoup(content)
 				for a in soup.findAll('a',href=True):
 					if re.findall('votehistory', a['href']):
-						vh = 'http://ilga.gov/legislation/'+a['href']
-						url = urllib2.urlopen(vh)
+						vl = 'http://ilga.gov/legislation/'+a['href']
+						url = urllib2.urlopen(vl)
 						content = url.read()
 						soup = BeautifulSoup(content)
-						for a in soup.findAll('a',href=True):
-							if re.findall('votehistory', a['href']):
+						for b in soup.findAll('a',href=True):
+							if re.findall('votehistory', b['href']):
+								llink = 'http://ilga.gov'+b['href']
 								try:
-									u = urllib2.urlopen('http://ilga.gov'+a['href'])
+									u = urllib2.urlopen(llink)
 									x = scraperwiki.pdftoxml(u.read())
 									root = lxml.etree.fromstring(x)
 									pages = list(root)
 									chamber = str()
 									for page in pages:
+										print "working_1"
 										for el in page:
+											print "working_2"
 											if el.tag == 'text':
 												if int(el.attrib['top']) == 168:
 													chamber = el.text

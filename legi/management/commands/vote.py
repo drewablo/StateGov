@@ -9,7 +9,7 @@ from legi.models import Votes
 class Command(BaseCommand):
 	def handle(self, *args, **options):
 		chmbrs =['http://www.ilga.gov/house/', 'http://www.ilga.gov/senate/']
-		site = chmbr[0]	
+		site = chmbrs[0]	
 		url = urllib2.urlopen(site)
 		content = url.read()
 		soup = BeautifulSoup(content)

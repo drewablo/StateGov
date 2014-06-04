@@ -11,13 +11,16 @@ def billcount(request):
 	b = Chamber.objects.filter(actions__startswith='Rule 19').count()
 	purg = a+b
 	public = Chamber.objects.filter(actions__startswith='Public Act').count()
-
 	context = {'latest_count': latest_count, 'pbh': pbh, 'sttg': sttg, 'purg': purg, 'public': public}
 	return render(request, 'legi/billcount.html', context)
 
-def billnum(request):
-	Num = Chamber.objects.filter(actions__startswith='Public Act')
-	context = {'Num': Num}
-	return render(request, 'legi/billnumbers.html', context)
-
+def billnum(self):
+    	queryset = Chamber.objects.filter(actions__startswith='Public Act')
+    	bills =[]
+    	for b in queryset:
+    		bb = str(b.billNumber())
+    		bills.append(bb)
+    	context = {'bills': bills}
+    	return render(self, 'legi/billnumbers.html', context)
+    	
 	

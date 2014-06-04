@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<!-- IE -->
+<link rel="shortcut icon" type="image/x-icon" href=""http://www.maythirtysecond.com/maythirtysecond.ico">
+<!-- other browsers -->
+<link rel="icon" type="image/x-icon" href="http://www.maythirtysecond.com/maythirtysecond.ico" />
+<link href="http://www.maythirtysecond.com/style.css" rel="stylesheet" type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>May 32nd</title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-50754701-1', 'maythirtysecond.com');
+  ga('send', 'pageview');
+</script>
+
+<body>
+	<div id="background">
+		<img style="width:100%; height:100%;" src="http://www.maythirtysecond.com/anim_sen.gif" />
+	</div>
+	<div style="font-family: &#39;Nobile&#39;, sans-serif; color:000; color:#000; padding-top:15%; padding-left:10%; padding-right:10%; text-align:left; font-size:150%;"> 
+	<span class="number"><h1>SO FAR THIS YEAR:</h2></span>
+	<ul id = "djangoList">
+	{% for b in bills %}
+		<li>{{ b }}</li>
+	{% endfor %}
+	</ul>
+	</div>
+	<div id="email">
+		<a href="mailto:contact@maythirtysecond.com">Contact Us</a>
+	</div>
+</body>

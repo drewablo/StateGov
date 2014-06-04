@@ -22,5 +22,24 @@ def billnum(self):
     		bills.append(bb)
     	context = {'bills': bills}
     	return render(self, 'legi/billnumbers.html', context)
+ 
+def billwait(self):
+    	queryset = Chamber.objects.filter(actions__startswith='Sent to the Governor')
+    	bills =[]
+    	for b in queryset:
+    		bb = str(b.billNumber())
+    		bills.append(bb)
+    	context = {'bills': bills}
+    	return render(self, 'legi/billnumbers.html', context)
     	
+def billlegi(self):
+    	queryset = Chamber.objects.filter(actions__startswith='Passed Both Houses')
+    	bills =[]
+    	for b in queryset:
+    		bb = str(b.billNumber())
+    		bills.append(bb)
+    	context = {'bills': bills}
+    	return render(self, 'legi/billnumbers.html', context)
+
+
 	

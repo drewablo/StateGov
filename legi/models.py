@@ -9,6 +9,8 @@ class Chamber(models.Model):
 	
 	def billNumber(self):
 		return self.legislation
+	def name(self):
+		return self.legislator:
 
 class Votes(models.Model):
 	legislator = models.CharField(max_length=60)

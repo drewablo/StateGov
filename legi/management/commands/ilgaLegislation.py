@@ -10,13 +10,14 @@ class Command(BaseCommand):
 		chmbrs =['http://www.ilga.gov/house/', 'http://www.ilga.gov/senate/']
 		chamber_abbr = ['HB','SB']
 		c = 0
-		partyAffil =[]
+		
 		for chmbr in chmbrs:
 			site = chmbr	
 			url = urllib2.urlopen(site)
 			content = url.read()
 			soup = BeautifulSoup(content)
 			links = []
+			partyAffil =[]
 			x=0
 			y=-1
 			table = soup.find('table', cellpadding=3)
@@ -30,11 +31,11 @@ class Command(BaseCommand):
 				party = col[4].string
 				partyAffil.append(party)
 			chamber_abbr = chamber_abbr[c]
-			partyAffil.append('D')
-			partyAffil.append('D')
-			partyAffil.append('R')
-			partyAffil.append('R')
-			print len(partyAffil)
+			if chamber_abbr == "HB":
+				partyAffil.append('D')
+				partyAffil.append('D')
+				partyAffil.append('R')
+				partyAffil.append('R')
 			for link in links:
 				y+=1
 				url = urllib2.urlopen(link)
@@ -53,7 +54,6 @@ class Command(BaseCommand):
 							if Chamber.objects.filter(legislation=bill).exists() == False:
 								s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date, party=partyAffil[y])
 								s.save()
-
 							elif Chamber.objects.filter(legislation=bill).exists() == True:
 								s = Chamber.objects.get(legislation=bill)
 								s.party=partyAffil[y]
@@ -65,5 +65,6 @@ class Command(BaseCommand):
 									s.save()
 
 
-
+			print chamber_abbr+" done"
 			c +=1
+			

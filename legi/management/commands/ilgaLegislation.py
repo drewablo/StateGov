@@ -25,8 +25,6 @@ class Command(BaseCommand):
 					l = (site + a['href']+'&Primary=True')
 					links.append(str(l))
 					x+=1
-					print len(links)
-					print"links"
 			for p in table.findAll('tr')[2:]:
 				col = p.findAll('td')
 				party = col[4].string

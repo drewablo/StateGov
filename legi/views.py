@@ -17,42 +17,49 @@ def billcount(request):
 def billnum(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Public Act', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Public Act', party='R')
+    	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
     		dd= str(d.billNumber())
     		Dbills.append(dd)
+    	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
     		rr= str(r.billNumber())
     		Rbills.append(rr)
-    	context = {'Dbills': Dbills, 'Rbills': Rbills}
+    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
     	return render(self, 'legi/billnumbers.html', context)
  
 def billwait(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Sent to the Governor', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Sent to the Governor', party='R')
+    	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
     		dd= str(d.billNumber())
     		Dbills.append(dd)
+    		
+    	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
     		rr= str(r.billNumber())
     		Rbills.append(rr)
-    	context = {'Dbills': Dbills, 'Rbills': Rbills}
+    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
     	return render(self, 'legi/billnumbers.html', context)
 
 def billlegi(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='R')
+    	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
     		dd= str(d.billNumber())
     		Dbills.append(dd)
+    	Rcount = Rqueryset.count()
     	Rbills =[]
     	for r in Rqueryset:
     		rr= str(r.billNumber())
     		Rbills.append(rr)
-    	context = {'Dbills': Dbills, 'Rbills': Rbills}
+    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
     	return render(self, 'legi/billnumbers.html', context)
  

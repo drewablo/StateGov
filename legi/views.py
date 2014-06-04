@@ -15,31 +15,44 @@ def billcount(request):
 	return render(request, 'legi/billcount.html', context)
 
 def billnum(self):
-    	queryset = Chamber.objects.filter(actions__startswith='Public Act')
-    	bills =[]
-    	for b in queryset:
-    		bb = str(b.billNumber())
-    		bills.append(bb)
-    	context = {'bills': bills}
+    	Dqueryset = Chamber.objects.filter(actions__startswith='Public Act', party='D')
+    	Rqueryset = Chamber.objects.filter(actions__startswith='Public Act', party='R')
+    	Dbills =[]
+    	for d in Dqueryset:
+    		dd= str(d.billNumber())
+    		Dbills.append(dd)
+    	Rbills =[]
+    	for r in Rqueryset:
+    		rr= str(r.billNumber())
+    		Rbills.append(rr)
+    	context = {'Dbills': Dbills, 'Rbills': Rbills}
     	return render(self, 'legi/billnumbers.html', context)
  
 def billwait(self):
-    	queryset = Chamber.objects.filter(actions__startswith='Sent to the Governor')
-    	bills =[]
-    	for b in queryset:
-    		bb = str(b.billNumber())
-    		bills.append(bb)
-    	context = {'bills': bills}
+    	Dqueryset = Chamber.objects.filter(actions__startswith='Sent to the Governor', party='D')
+    	Rqueryset = Chamber.objects.filter(actions__startswith='Sent to the Governor', party='R')
+    	Dbills =[]
+    	for d in Dqueryset:
+    		dd= str(d.billNumber())
+    		Dbills.append(dd)
+    	Rbills =[]
+    	for r in Rqueryset:
+    		rr= str(r.billNumber())
+    		Rbills.append(rr)
+    	context = {'Dbills': Dbills, 'Rbills': Rbills}
     	return render(self, 'legi/billnumbers.html', context)
-    	
+
 def billlegi(self):
-    	queryset = Chamber.objects.filter(actions__startswith='Passed Both Houses')
-    	bills =[]
-    	for b in queryset:
-    		bb = str(b.billNumber())
-    		bills.append(bb)
-    	context = {'bills': bills}
+    	Dqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='D')
+    	Rqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='R')
+    	Dbills =[]
+    	for d in Dqueryset:
+    		dd= str(d.billNumber())
+    		Dbills.append(dd)
+    	Rbills =[]
+    	for r in Rqueryset:
+    		rr= str(r.billNumber())
+    		Rbills.append(rr)
+    	context = {'Dbills': Dbills, 'Rbills': Rbills}
     	return render(self, 'legi/billnumbers.html', context)
-
-
-	
+ 

@@ -6,6 +6,7 @@ class Chamber(models.Model):
 	legislation = models.CharField(max_length=8)
 	actions = models.CharField(max_length=100)
 	dt =  models.CharField(max_length=10)
+	lnk = models.CharField(max_length=350)
 	party = models.CharField(max_length=1)
 	
 	def billNumber(self):
@@ -14,6 +15,8 @@ class Chamber(models.Model):
 		return self.legislator
 	def date(self):
 		return self.dt
+	def link(self):
+		return self.link
 	def pol(self):
 		return self.party
 

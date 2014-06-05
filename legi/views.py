@@ -17,42 +17,51 @@ def billcount(request):
 def billnum(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Public Act', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Public Act', party='R')
+    	Total = Chamber.objects.filter(actions__startswith='Public Act')
     	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
     		Dbills.append(str(d.billNumber()))
+	Dpercent = Dcount/Total.count()
     	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
     		Rbills.append(str(r.billNumber()))
-    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
+    	Rpercent = Rcount/Total.count()
+    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount, 'Dpercnet': Dpercnet, 'Rpercent': Rpercent}
     	return render(self, 'legi/billnumbers.html', context)
  
 def billwait(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Sent to the Governor', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Sent to the Governor', party='R')
+    	Total = Chamber.objects.filter(actions__startswith='Public Act')
     	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
     		Dbills.append(str(d.billNumber()))
+	Dpercent = Dcount/Total.count()
     	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
     		Rbills.append(str(r.billNumber()))
-    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
+    	Rpercent = Rcount/Total.count()
+    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount, 'Dpercnet': Dpercnet, 'Rpercent': Rpercent}
     	return render(self, 'legi/billnumbers.html', context)
  
 def billlegi(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='R')
+    	Total = Chamber.objects.filter(actions__startswith='Public Act')
     	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
     		Dbills.append(str(d.billNumber()))
+	Dpercent = Dcount/Total.count()
     	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
     		Rbills.append(str(r.billNumber()))
-    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
+    	Rpercent = Rcount/Total.count()
+    	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount, 'Dpercnet': Dpercnet, 'Rpercent': Rpercent}
     	return render(self, 'legi/billnumbers.html', context)
  

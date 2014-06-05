@@ -20,13 +20,11 @@ def billnum(self):
     	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
-    		dd= str(d.billNumber())
-    		Dbills.append(dd)
+    		Dbills.append(str(d.billNumber()))
     	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
-    		rr= str(r.billNumber())
-    		Rbills.append(rr)
+    		Rbills.append(str(r.billNumber()))
     	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
     	return render(self, 'legi/billnumbers.html', context)
  
@@ -36,30 +34,25 @@ def billwait(self):
     	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
-    		dd= str(d.billNumber())
-    		Dbills.append(dd)
-    		
+    		Dbills.append(str(d.billNumber()))
     	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
-    		rr= str(r.billNumber())
-    		Rbills.append(rr)
+    		Rbills.append(str(r.billNumber()))
     	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
     	return render(self, 'legi/billnumbers.html', context)
-
+ 
 def billlegi(self):
     	Dqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='D')
     	Rqueryset = Chamber.objects.filter(actions__startswith='Passed Both Houses', party='R')
     	Dcount = Dqueryset.count()
     	Dbills =[]
     	for d in Dqueryset:
-    		dd= str(d.billNumber())
-    		Dbills.append(dd)
-    	Rcount = Rqueryset.count()
+    		Dbills.append(str(d.billNumber()))
+    	Rcount = Rqueryset.count()	
     	Rbills =[]
     	for r in Rqueryset:
-    		rr= str(r.billNumber())
-    		Rbills.append(rr)
+    		Rbills.append(str(r.billNumber()))
     	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount}
     	return render(self, 'legi/billnumbers.html', context)
  

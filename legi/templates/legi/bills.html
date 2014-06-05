@@ -11,6 +11,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>May 32nd</title>
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -23,15 +24,24 @@
 <body>
 
 	<div style="font-family: &#39;Nobile&#39;, sans-serif; color:000; color:#000; padding-top:5%; padding-left:10%; padding-right:10%; text-align:left; font-size:150%;"> 
-	<h1 style="text-align:center"><span style="text-align:center; font-size:75%; color:#0000FF; padding-right:5%">Democrat Bills: {{ Dcount}}</span><span style="text-align:center; font-size:75%; color:#FF0000">GOP Bills: {{ Rcount}}</span></h1>
-	<ul id = "djangoList">
+	<div id = "djangoListD">
+	<h1 style="text-align:center;"><span style="text-align:center; font-size:75%; color:#0000FF">Democrat Bills: {{ Dcount}}</span></h1>
+	<ul id="djangoList">
 	{% for d in Dbills %}
 		<span><li id='DEM'>{{ d }}</li></span>
 	{% endfor %}
+	</ul>
+	</div>
+	
+	<div id = "djangoListR">
+	<h1 style="text-align:center;"><span style="text-align:center; font-size:75%; color:#FF0000;">GOP Bills: {{ Rcount}}</span></h1>
+	<ul id="djangoList">
 	{% for r in Rbills %}
 		<span><li id='GOP'>{{ r }}</li></span>
 	{% endfor %}
 	</ul>
+	</div>
+	
 	<br>
 	</div>
 	<div id="email">

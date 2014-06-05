@@ -36,6 +36,8 @@ class Command(BaseCommand):
 				partyAffil.append('D')
 				partyAffil.append('R')
 				partyAffil.append('R')
+			else:
+				print len(partyAffil), len(links)
 			for link in links:
 				y+=1
 				url = urllib2.urlopen(link)
@@ -44,6 +46,8 @@ class Command(BaseCommand):
 				table = soup.find('table', cellpadding=3)
 				for item in table.findAll('tr')[0:]:
 					col = item.findAll('td')
+					for ck in col[0].findAll('a'):
+						link = 'http://ilga.gov'+ck.get('href')
 					bill = col[0].string
 					sponsor = col[1].string
 					sponsor = sponsor.encode('ascii','replace')
@@ -52,11 +56,11 @@ class Command(BaseCommand):
 					for z in re.findall('2014', last_action_date):
 						for q in re.findall(chamber_abbr, bill):
 							if Chamber.objects.filter(legislation=bill).exists() == False:
-								s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date, party=partyAffil[y])
+								s = Chamber(legislator=sponsor, legislation=bill, actions=last_action, dt=last_action_date, lnk=link, party=partyAffil[y])
 								s.save()
 							elif Chamber.objects.filter(legislation=bill).exists() == True:
 								s = Chamber.objects.get(legislation=bill)
-								s.party=partyAffil[y]
+								s.lnk = link
 								s.save()
 								if s.actions.encode('ascii')!=last_action:
 									s.actions=last_action

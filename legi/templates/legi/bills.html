@@ -7,7 +7,7 @@
 <link rel="icon" type="image/x-icon" href="http://www.maythirtysecond.com/maythirtysecond.ico" />
 <link href="http://www.maythirtysecond.com/style.css" rel="stylesheet" type="text/css" />
 <link href='http://fonts.googleapis.com/css?family=Nobile:400,700' rel='stylesheet' type='text/css'>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>May 32nd</title>
 <style>
@@ -76,31 +76,10 @@
 	{% endfor %}
 	</ul>
 	</div>
-	
 	<br>
 	</div>
 	<div id="email">
 		<a href="mailto:contact@maythirtysecond.com">Contact Us</a>
 	</div>
-<script>
-$( "#dCircle" ).click(function(){
-    $("#dCircle, #rCircle").fadeOut(function () {
-        $("#djangoList, #djangoListR").fadeIn();
-    });
-    return false;   
-});
-$("#rCircle").click(function(){
-    $("#rCircle, #dCircle").fadeOut(function () {
-        $("#djangoList, #djangoListR").fadeIn();
-    });
-    return false;
-});
-$( "ul" ).click(function(){
-    $("ul").fadeOut(function () {
-    $("#dCircle, #rCircle").fadeIn();
-    }); 
-    return false;
-});  
-
-</script>
+<script src="http://maythirtysecond.com/clicker.js"></script>
 </body>

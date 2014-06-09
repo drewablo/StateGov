@@ -72,3 +72,15 @@ def billlegi(self):
     		Rbills.append(rr)
     	context = {'Dbills': Dbills, 'Rbills': Rbills, 'Dcount': Dcount, 'Rcount': Rcount, 'dPercent': dPercent, 'rPercent': rPercent}
     	return render(self, 'legi/billnumbers.html', context)
+
+def veto(self):
+	Vquery = Chamber.objects.filter(actions__icontains='veto', dt__startswith='6')
+	VetoCount = Vquery.count()
+	
+	vetoBills = []
+	for v in Vquery:
+		vv = str(v.billNumber())
+		vetoBills.append(vv)
+	
+	context = {'VetoCount': VetoCount, 'vetoBills': vetoBills}
+	return render(self, 'legi/veto.html', context)

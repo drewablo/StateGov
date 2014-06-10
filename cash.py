@@ -1,3 +1,4 @@
+
 from bs4 import BeautifulSoup
 import urllib2
 import re
@@ -6,16 +7,40 @@ import os
 money = str()
 zips = str()
 
-site = "http://www.elections.il.gov/campaigndisclosure/ContribListPrint.aspx?LastOnlyNameSearchType=Starts+with&LastOnlyName=&FirstNameSearchType=Starts+with&FirstName=&AddressSearchType=Starts+with&Address=&CitySearchType=Starts+with&City=&State=&Zip=&ZipThru=&ContributionType=All+Types&OccupationSearchType=Starts+with&Occupation=&EmployerSearchType=Starts+with&Employer=&VendorLastOnlyNameSearchType=Starts+with&VendorLastOnlyName=&VendorFirstNameSearchType=Starts+with&VendorFirstName=&VendorAddressSearchType=Starts+with&VendorAddress=&VendorCitySearchType=Starts+with&VendorCity=&VendorState=&VendorZip=&VendorZipThru=&OtherReceiptsDescriptionSearchType=&OtherReceiptsDescription=&PurposeState=Starts+with&Purpose=&Amount=&AmountThru=&RcvDate=1%2f1%2f2014&RcvDateThru=11%2f10%2f2014&Archived=false&QueryType=Contrib&LinkedQuery=false&OrderBy=Last+or+Only+Name+-+A+to+Z"
+site = "http://www.elections.il.gov/campaigndisclosure/ContribListPrint.aspx?LastOnlyNameSearchType=Starts+with&LastOnlyName=&FirstNameSearchType=Starts+with&FirstName=&AddressSearchType=Sta$
 url = urllib2.urlopen(site).read()
 soup = BeautifulSoup(url)
 table = soup.find('table', {'id': 'tblContributionListPrint'})
 for item in table.findAll('tr')[2:]:
     for row in item.findAll('td'):
         for span in row.findAll('span'):
-            if re.findall(r'(^\$)', span.text):
-                if re.findall(r'(^\$\d+)|(^\$\d)', span.text):
-                    money = str(re.findall(r'(^\$\d+)', span.text))
-            elif re.findall(r'(^\d+)', span.text):
-                    zips = str(re.findall(r'(\d{5})', span.text))
-        print money, zips
+                if re.findall(r'(\$[0-9]+[,]?[0-9]+\.d{2})', span.text):
+                        money = re.findall(r'(\$[0-9]+[,]?[0-9]+\.d{2})', span.text)
+                        date = re.findall(r'(^[0-9]+\\[0-9]+\\\d{4}
+                elif re.findall(r'(\$[0-9]+.\d{2})', span.text):
+                        money = re.findall(r'(\$\d\.\d{2})', span.text)
+                elif re.findall(r'(^\d+)', span.text):
+                        zips = re.findall(r'(\d{5})', span.text)
+
+        if len(zips) > 1:
+                zips.pop(0)
+                z = str(zips[0])
+                m = str(money[0])
+                master =(z,m)
+                print master
+        elif len(zips) == 1:
+                try:
+                        z = str(zips[0])
+                        m = str(money[0])
+                        master =(z,m)
+                        print master
+                except:
+                        z = zips[0]
+                        m = money
+                        master = (z,m)
+                        print master
+
+                else:
+                        print 'error'
+
+

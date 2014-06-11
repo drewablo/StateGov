@@ -22,6 +22,8 @@ for item in table.findAll('tr')[2:]:
                                 money = re.findall(r'(\$?[\d,]*\d,\d{3}\.\d{2})', span.text)
                         elif re.findall(r'(\$?[\d{2},]*\d{2},\d{3}\.\d{2})', span.text):
                                 money = re.findall(r'(\$?[\d{2},]*\d{2},\d{3}\.\d{2})', span.text)
+                        elif re.findall(r'(\$?[\d{3},]*\d,\d{3}\.\d{2})', span.text):
+                                money = re.findall(r'(\$?[\d{3},]*\d,\d{3}\.\d{2})', span.text)
                         elif re.findall(r'(\$\d\.\d{2})', span.text):
                                 money = re.findall(r'(\$\d)\.\d{2}', span.text)
                         elif re.findall(r'(\$\d+\.\d{2})', span.text):

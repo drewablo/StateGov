@@ -5,14 +5,24 @@ import re
 moneyZips = open('moneyZips.csv', 'wb')
 writer = csv.writer(moneyZips)
 
-xml = ('Receipts.xml')
-context = etree.iterparse(xml, tag='RECEIPTLIST')
-for action, elem in context:
-        zips = elem.xpath('RECEIPT/Zip/text()')
-        money = elem.xpath('RECEIPT/Amount/text()')
-        if re.findall(r'(-)', zips):
-                zips = re.findall(r'(^\d{5})', zips)
-        writer.writerow(zips,money)
+x=0
+xml =('Receipts.xml')
+tree = etree.parse(xml)
+root = tree.getroot()
+master = []
+z = str()
+m = str()
+for child in root:
+        gc =[]
+        for grandchild in child:
+                if grandchild.tag == 'State':
+                        z = grandchild.text
+                if grandchild.tag == 'Amount':
+                        m = grandchild.text
+                combo = (z,m)
+        writer.writerow(combo)
+
+
 
 
 

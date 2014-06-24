@@ -2,6 +2,21 @@ from lxml import etree
 import csv
 import re
 
+
+def convert(filename):
+        csv_filename = filename[0]
+        print "Opening CSV file: ",csv_filename 
+        f=open(csv_filename, 'r')
+        csv_reader = csv.DictReader(f,fieldnames)
+        json_filename = csv_filename.split(".")[0]+".json"
+        print "Saving JSON to file: ",json_filename
+        jsonf = open(json_filename,'w') 
+        data = json.dumps([r for r in csv_reader])
+        jsonf.write(data) 
+        f.close()
+        jsonf.close()
+
+
 moneyZips = open('moneyZips.csv', 'wb')
 writer = csv.writer(moneyZips)
 
@@ -55,3 +70,5 @@ for child in root:
                         m = grandchild.text
                 combo = (a,cy,s,z,f,n,m,d,c)
         writer.writerow(combo)
+moneyZips.close()
+convert(moneyZips.csv)

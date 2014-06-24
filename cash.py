@@ -1,12 +1,6 @@
 from lxml import etree
 import csv
 import re
-import json
-import simplejson
-
-
-
-fd = open('money.json', 'wb')
 
 moneyZips = open('moneyZips.csv', 'wb')
 writer = csv.writer(moneyZips)
@@ -60,7 +54,4 @@ for child in root:
                 if grandchild.tag == 'Amount':
                         m = grandchild.text
                 combo = (a,cy,s,z,f,n,m,d,c)
-                jsondata = simplejson.dumps(combo, indent=4, skipkeys=True, sort_keys=True)
         writer.writerow(combo)
-        fd.write(jsondata)
-fd.close()

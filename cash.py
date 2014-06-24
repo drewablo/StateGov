@@ -1,24 +1,18 @@
 from lxml import etree
 import csv
 import re
+import datetime
 
+now = datetime.datetime.now()
+year = str(now.year)
+month = str(now.month)
+day = str(now.day)
 
-def convert(filename):
-        csv_filename = filename[0]
-        print "Opening CSV file: ",csv_filename 
-        f=open(csv_filename, 'r')
-        csv_reader = csv.DictReader(f,fieldnames)
-        json_filename = csv_filename.split(".")[0]+".json"
-        print "Saving JSON to file: ",json_filename
-        jsonf = open(json_filename,'w') 
-        data = json.dumps([r for r in csv_reader])
-        jsonf.write(data) 
-        f.close()
-        jsonf.close()
+money = open('money.csv', 'wb')
+writer = csv.writer(money)
 
-
-moneyZips = open('moneyZips.csv', 'wb')
-writer = csv.writer(moneyZips)
+today = open('moneyToday.csv', 'wb')
+writerToday = csv.writer(today)
 
 x=0
 xml =('Receipts.xml')
@@ -70,5 +64,5 @@ for child in root:
                         m = grandchild.text
                 combo = (a,cy,s,z,f,n,m,d,c)
         writer.writerow(combo)
-moneyZips.close()
-convert(moneyZips.csv)
+        if d == month+"/"+day+"/"+year:
+        		writerToday.writerow(combo)
